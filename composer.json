@@ -1,0 +1,26 @@
+{
+    "name": "26b/joiner",
+    "version": "1.0.0",
+    "description": "Join strings with conditional values",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.3"
+    },
+    "require-dev": {
+        "pestphp/pest": "^4.0 || ^5.0"
+    },
+    "autoload": {
+        "files": [
+            "src/joiner.php"
+        ]
+    },
+    "scripts": {
+        "test": "pest"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

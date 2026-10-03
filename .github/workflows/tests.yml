@@ -1,0 +1,29 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.3', '8.4', '8.5', '8.6']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-${{ runner.os }}-${{ matrix.php }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-${{ matrix.php }}-
+      # Pest 5's PHPUnit/ParaTest stack supports PHP 8.6; the lockfile stays on Pest 4 for 8.3–8.5.
+      - if: matrix.php == '8.6'
+        run: composer update pestphp/pest --with-all-dependencies --no-interaction --prefer-dist
+      - if: matrix.php != '8.6'
+        run: composer install --no-interaction --prefer-dist
+      - run: composer test
