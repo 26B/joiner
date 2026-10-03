@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Resolve development dependencies independently in each PHP CI matrix job; do not commit `composer.lock`.
+
 ## [1.0.0] - 2026-10-03
 
 ### Added
